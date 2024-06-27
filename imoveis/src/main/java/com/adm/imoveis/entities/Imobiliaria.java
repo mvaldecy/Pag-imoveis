@@ -1,9 +1,12 @@
 package com.adm.imoveis.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +17,9 @@ public class Imobiliaria {
     private Long id;
     
     private String nome;
+
+    @OneToMany(mappedBy = "imobiliaria")
+    private List<Inquilino> inquilinos;
     
 
     public Imobiliaria(Long id, String nome) {

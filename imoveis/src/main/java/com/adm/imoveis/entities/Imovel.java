@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,6 +24,9 @@ public class Imovel {
 	private int tamanho;
 	private int apto;
 	private String status;
+
+	@OneToOne(mappedBy = "imovel")
+	private Inquilino inquilino;
 
 	public Imovel(Long id, String tipo, int tamanho, int apto, String status) {
 		this.id = id;
@@ -70,6 +74,16 @@ public class Imovel {
 	public void setPredio(Predio predio) {
 		this.predio = predio;
 	}
+
+	public Inquilino getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Inquilino inquilino) {
+		this.inquilino = inquilino;
+	}
+
+	
 
 	
 }

@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-ImoveisDbApplication<imoveis>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.adm.imoveis.ImoveisDbApplication",
+      "projectName": "imoveis",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}

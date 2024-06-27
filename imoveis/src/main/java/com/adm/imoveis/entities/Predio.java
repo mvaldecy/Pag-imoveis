@@ -21,6 +21,7 @@ public class Predio {
 	private String latitude;
 	private String longitude;
 	private String link;
+	
 
 	@OneToMany(mappedBy = "predio")
 	private List<Imovel> imoveis;

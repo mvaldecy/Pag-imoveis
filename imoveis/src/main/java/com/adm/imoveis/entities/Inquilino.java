@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,4 +19,73 @@ public class Inquilino {
 	private String nome;
 	private String cpf;
 	private String status; // criar interface
+
+
+	@OneToOne
+	@JoinColumn(name = "imovel_id")
+	private Imovel imovel;
+
+	@ManyToOne
+	@JoinColumn(name = "imobiliaria_id")
+	private Imobiliaria imobiliaria;
+
+	public Inquilino(Long id, String nome, String cpf, String status) {
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.status = status;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Imobiliaria getImobiliaria() {
+		return imobiliaria;
+	}
+
+	public void setImobiliaria(Imobiliaria imobiliaria) {
+		this.imobiliaria = imobiliaria;
+	}
+
+	public Imovel getImovel() {
+		return imovel;
+	}
+
+	public void setImovel(Imovel imovel) {
+		this.imovel = imovel;
+	}
+
+	
+
+	
+
 }
