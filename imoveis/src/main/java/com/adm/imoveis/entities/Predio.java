@@ -1,9 +1,12 @@
 package com.adm.imoveis.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -18,7 +21,10 @@ public class Predio {
 	private String latitude;
 	private String longitude;
 	private String link;
-	
+
+	@OneToMany(mappedBy = "predio")
+	private List<Imovel> imoveis;
+
 	public Predio(Long id, String nome, String endereco, String latitude, String longitude, String link) {
 		this.id = id;
 		this.nome = nome;
@@ -63,6 +69,14 @@ public class Predio {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	public List<Imovel> getImoveis() {
+		return imoveis;
+	}
+	public void setImoveis(List<Imovel> imoveis) {
+		this.imoveis = imoveis;
+	}
+
+	
 
 	
 }
