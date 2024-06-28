@@ -1,9 +1,13 @@
 package com.adm.imoveis.controller;
 
 import java.util.List;
+
+import org.apache.catalina.connector.Response;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +31,13 @@ public class ImobiliariaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(imobiliariaService.create(imobiliaria));
     }
 
-    @GetMapping
+    @GetMapping(value = "imobiliaria")
     public ResponseEntity<List<ImobiliariaDto>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(imobiliariaService.getAll());
+    }
+
+    @GetMapping(value = "imobiliaria/{id}")
+    public ResponseEntity<ImobiliariaDto> getById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(imobiliariaService.getById(id));
     }
 }

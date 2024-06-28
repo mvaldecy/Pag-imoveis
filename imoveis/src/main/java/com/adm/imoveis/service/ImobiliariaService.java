@@ -9,6 +9,7 @@ import com.adm.imoveis.dto.ImobiliariaCreationDto;
 import com.adm.imoveis.dto.ImobiliariaDto;
 import com.adm.imoveis.entities.Imobiliaria;
 import com.adm.imoveis.repositories.ImobiliariaRepository;
+import com.adm.imoveis.service.exception.ImobiliariaNotFound;
 
 @Service
 public class ImobiliariaService {
@@ -32,5 +33,11 @@ public class ImobiliariaService {
   public List<ImobiliariaDto> getAll() {
     List<Imobiliaria> imobiliariaList = imobiliariaRepository.findAll();
     return DtoUtils.imobiliariaModelListtoDtoList(imobiliariaList);
-  } 
+  }
+
+  public ImobiliariaDto getById(Long id) {
+    Imobiliaria imobiliaria = imobiliariaRepository.findById(id).orElseThrow(ImobiliariaNotFound::new);
+
+    return DtoUtils.imobiliariaModelToDto(imobiliaria);
+  }
 }
