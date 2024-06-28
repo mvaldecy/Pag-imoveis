@@ -20,6 +20,8 @@ public class Imobiliaria {
 
     @OneToMany(mappedBy = "imobiliaria")
     private List<Inquilino> inquilinos;
+
+    public Imobiliaria() {}
     
 
     public Imobiliaria(String nome) {

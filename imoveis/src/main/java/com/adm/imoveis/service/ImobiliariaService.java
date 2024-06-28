@@ -1,7 +1,10 @@
 package com.adm.imoveis.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.adm.imoveis.dto.DtoUtils;
 import com.adm.imoveis.dto.ImobiliariaCreationDto;
 import com.adm.imoveis.dto.ImobiliariaDto;
 import com.adm.imoveis.entities.Imobiliaria;
@@ -25,4 +28,9 @@ public class ImobiliariaService {
     Imobiliaria createdImobiliaria = imobiliariaRepository.save(newImobiliaria);
     return new ImobiliariaDto(createdImobiliaria.getId(), createdImobiliaria.getNome());
   }
+
+  public List<ImobiliariaDto> getAll() {
+    List<Imobiliaria> imobiliariaList = imobiliariaRepository.findAll();
+    return DtoUtils.imobiliariaModelListtoDtoList(imobiliariaList);
+  } 
 }
