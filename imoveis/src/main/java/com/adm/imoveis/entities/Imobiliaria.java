@@ -22,8 +22,7 @@ public class Imobiliaria {
     private List<Inquilino> inquilinos;
     
 
-    public Imobiliaria(Long id, String nome) {
-        this.id = id;
+    public Imobiliaria(String nome) {
         this.nome = nome;
     }
 

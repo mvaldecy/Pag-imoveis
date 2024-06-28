@@ -20,6 +20,8 @@ public class Imovel {
 	@JoinColumn(name = "predio_id")
 	private Predio predio;
 
+	
+
 	private String tipo;
 	private int tamanho;
 	private int apto;
@@ -39,32 +41,9 @@ public class Imovel {
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public String getTipo() {
-		return tipo;
-	}
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-	public int getTamanho() {
-		return tamanho;
-	}
-	public void setTamanho(int tamanho) {
-		this.tamanho = tamanho;
-	}
-	public int getApto() {
-		return apto;
-	}
-	public void setApto(int apto) {
-		this.apto = apto;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public Predio getPredio() {
@@ -73,6 +52,38 @@ public class Imovel {
 
 	public void setPredio(Predio predio) {
 		this.predio = predio;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(int tamanho) {
+		this.tamanho = tamanho;
+	}
+
+	public int getApto() {
+		return apto;
+	}
+
+	public void setApto(int apto) {
+		this.apto = apto;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public Inquilino getInquilino() {
