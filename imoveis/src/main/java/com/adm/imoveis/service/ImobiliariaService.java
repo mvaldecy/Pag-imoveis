@@ -15,6 +15,11 @@ public class ImobiliariaService {
     this.imobiliariaRepository = imobiliariaRepository;
   }
 
+  /**
+   * 
+   * @param imobiliaria
+   * @return
+   */
   public ImobiliariaDto create(ImobiliariaCreationDto imobiliaria) {
     Imobiliaria newImobiliaria = new Imobiliaria(imobiliaria.nome());
     Imobiliaria createdImobiliaria = imobiliariaRepository.save(newImobiliaria);
