@@ -26,8 +26,10 @@ public class Predio {
 	@OneToMany(mappedBy = "predio")
 	private List<Imovel> imoveis;
 
-	public Predio(Long id, String nome, String endereco, String latitude, String longitude, String link) {
-		this.id = id;
+
+	public Predio() {}
+
+	public Predio(String nome, String endereco, String latitude, String longitude, String link) {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.latitude = latitude;

@@ -29,8 +29,7 @@ public class Inquilino {
 	@JoinColumn(name = "imobiliaria_id")
 	private Imobiliaria imobiliaria;
 
-	public Inquilino(Long id, String nome, String cpf, String status) {
-		this.id = id;
+	public Inquilino(String nome, String cpf, String status) {
 		this.nome = nome;
 		this.cpf = cpf;
 		this.status = status;

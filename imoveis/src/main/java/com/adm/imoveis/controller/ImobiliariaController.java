@@ -2,8 +2,7 @@ package com.adm.imoveis.controller;
 
 import java.util.List;
 
-import org.apache.catalina.connector.Response;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,7 @@ public class ImobiliariaController {
         this.imobiliariaService = imobiliariaService;
     }
 
-    @PostMapping
+    @PostMapping(value = "imobiliaria")
     public ResponseEntity<ImobiliariaDto> create(@RequestBody ImobiliariaCreationDto imobiliaria) {
         return ResponseEntity.status(HttpStatus.CREATED).body(imobiliariaService.create(imobiliaria));
     }

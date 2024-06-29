@@ -8,6 +8,12 @@ public class DtoUtils {
         return new ImobiliariaDto(imobiliaria.getId(), imobiliaria.getNome());
     }
 
+    /**
+     * Maps a list of Imobiliaria objects to a list of ImobiliariaDto objects.
+     *
+     * @param  imobiliariaList   the list of Imobiliaria objects to be mapped
+     * @return                  a list of ImobiliariaDto objects
+     */
     public static List<ImobiliariaDto> imobiliariaModelListtoDtoList(List<Imobiliaria> imobiliariaList) {
         return imobiliariaList.stream().map((i) -> new ImobiliariaDto(i.getId(), i.getNome())).toList();
     }
