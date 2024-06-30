@@ -2,6 +2,9 @@ package com.adm.imoveis.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "predio")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Predio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +26,7 @@ public class Predio {
 	private String longitude;
 	private String link;
 	
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "predio")
 	private List<Imovel> imoveis;
 

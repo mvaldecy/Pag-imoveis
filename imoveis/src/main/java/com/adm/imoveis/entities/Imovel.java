@@ -1,6 +1,7 @@
 package com.adm.imoveis.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -16,7 +17,7 @@ public class Imovel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "predio_id")
 	private Predio predio;
 
@@ -30,8 +31,9 @@ public class Imovel {
 	@OneToOne(mappedBy = "imovel")
 	private Inquilino inquilino;
 
-	public Imovel(Long id, String tipo, int tamanho, int apto, String status) {
-		this.id = id;
+	public Imovel() {}
+
+	public Imovel(String tipo, int tamanho, int apto, String status) {
 		this.tipo = tipo;
 		this.tamanho = tamanho;
 		this.apto = apto;
