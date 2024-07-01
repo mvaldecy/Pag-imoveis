@@ -1,11 +1,14 @@
 package com.adm.imoveis.entities;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -28,6 +31,9 @@ public class Inquilino {
 	@ManyToOne
 	@JoinColumn(name = "imobiliaria_id")
 	private Imobiliaria imobiliaria;
+
+	@OneToMany(mappedBy = "inquilino")
+	private List<Repasse> repasse;
 
 	public Inquilino() {}
 
@@ -83,6 +89,14 @@ public class Inquilino {
 
 	public void setImovel(Imovel imovel) {
 		this.imovel = imovel;
+	}
+
+	public List<Repasse> getRepasse() {
+		return repasse;
+	}
+
+	public void setRepasse(List<Repasse> repasse) {
+		this.repasse = repasse;
 	}
 
 	
