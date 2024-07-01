@@ -3,6 +3,9 @@ package com.adm.imoveis.entities;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,6 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "repasse")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Repasse {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
