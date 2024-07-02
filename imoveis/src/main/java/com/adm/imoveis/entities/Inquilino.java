@@ -40,6 +40,9 @@ public class Inquilino {
 	@OneToMany(mappedBy = "inquilino")
 	private List<Repasse> repasse;
 
+	@OneToMany(mappedBy = "inquilino")
+	List<Contrato> contratos;
+
 	public Inquilino() {}
 
 	public Inquilino(String nome, String cpf, String status) {
