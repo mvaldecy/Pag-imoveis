@@ -6,5 +6,9 @@ import com.adm.imoveis.repositories.ContratoRepository;
 
 @Service
 public class ContratoService {
-    private final ContratoRepository contratoRepository
+    private final ContratoRepository contratoRepository;
+
+    public ContratoService (ContratoRepository contratoRepository) {
+        this.contratoRepository = contratoRepository;
+    }
 }

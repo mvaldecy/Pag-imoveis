@@ -25,7 +25,7 @@ public class Imovel {
 
 	private String tipo;
 	private int tamanho;
-	private int apto;
+	private String apto;
 	private String status;
 
 
@@ -34,7 +34,7 @@ public class Imovel {
 
 	public Imovel() {}
 
-	public Imovel(String tipo, int tamanho, int apto, String status) {
+	public Imovel(String tipo, int tamanho, String apto, String status) {
 		this.tipo = tipo;
 		this.tamanho = tamanho;
 		this.apto = apto;
@@ -73,11 +73,11 @@ public class Imovel {
 		this.tamanho = tamanho;
 	}
 
-	public int getApto() {
+	public String getApto() {
 		return apto;
 	}
 
-	public void setApto(int apto) {
+	public void setApto(String apto) {
 		this.apto = apto;
 	}
 
