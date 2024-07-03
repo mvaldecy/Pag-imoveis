@@ -18,15 +18,7 @@ public class RepasseService {
         this.repasseRepository = repasseRepository;
     }
 
-    public Repasse create(RepasseCreationDto repasse) {
-        YearMonth convertedDate = DateUtil.conversor(repasse.dataRepasse());
-        Repasse newRepasse = new Repasse(repasse.valorRepasse(), convertedDate);
-        return repasseRepository.save(newRepasse);
-    }
-
-    public List<Repasse> getAll() {
-        return repasseRepository.findAll();
-    }
+   
 
     
 

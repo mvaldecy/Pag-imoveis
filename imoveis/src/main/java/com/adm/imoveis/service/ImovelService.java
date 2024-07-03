@@ -58,7 +58,7 @@ public class ImovelService {
         return convertImovelModelListtoDto(imovelRepository.findAll());
     }
 
-    public List<ImovelDto> getByPredioId(Long predioId) { // testar
+    public List<ImovelDto> getByPredioId(Long predioId) { 
         Predio predio = predioRepository.findById(predioId).orElseThrow(PredioNotFound::new);
         List<Imovel> imoveis = imovelRepository.findByPredio(predio);
         return convertImovelModelListtoDto(imoveis);

@@ -39,4 +39,9 @@ public class ImovelController {
     public ResponseEntity<ImovelDto> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(imovelService.getById(id));
     }
+
+    @GetMapping(value = "imovelByPredioId/{id}")
+    public ResponseEntity<List<ImovelDto>> getByPredioId(@PathVariable Long predioId) {
+        return ResponseEntity.status(HttpStatus.OK).body(imovelService.getByPredioId(predioId));
+    }
 }

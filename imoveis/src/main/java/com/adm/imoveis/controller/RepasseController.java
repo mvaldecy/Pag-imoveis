@@ -23,13 +23,5 @@ public class RepasseController {
         this.repasseService = repasseService;
     }
 
-    @PostMapping(value = "repasse")
-    public ResponseEntity<Repasse> create(@RequestBody RepasseCreationDto repasse) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(repasseService.create(repasse));
-    }
-
-    @GetMapping(value = "repasse")
-    public ResponseEntity<List<Repasse>> getAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(repasseService.getAll());
-    }
+    
 }
