@@ -3,7 +3,6 @@ package com.adm.imoveis.entities;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -22,13 +21,13 @@ public class Repasse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "inquilino_id")
-    private Inquilino inquilino;
-
     private Double valorRepasse;
 
     private YearMonth dataRepasse;
+
+    @ManyToOne
+    @JoinColumn(name = "contrato_id")
+    private Contrato contrato;
 
     public Repasse() {}
 
@@ -43,14 +42,6 @@ public class Repasse {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Inquilino getInquilino() {
-        return inquilino;
-    }
-
-    public void setInquilino(Inquilino inquilino) {
-        this.inquilino = inquilino;
     }
 
     public Double getValorRepasse() {
@@ -69,7 +60,11 @@ public class Repasse {
         this.dataRepasse = dataRepasse;
     }
 
+    public Contrato getContrato() {
+        return contrato;
+    }
 
-
-
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
 }

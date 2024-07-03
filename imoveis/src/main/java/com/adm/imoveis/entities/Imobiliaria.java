@@ -21,6 +21,10 @@ public class Imobiliaria {
     @OneToMany(mappedBy = "imobiliaria")
     private List<Inquilino> inquilinos;
 
+    @OneToMany(mappedBy = "imobiliaria")
+    private List<Contrato> contratos;
+
+
     public Imobiliaria() {}
     
 
@@ -44,10 +48,33 @@ public class Imobiliaria {
         this.nome = nome;
     }
 
+    
+
     @Override
     public String toString() {
         return "Imobiliaria [id=" + id + ", nome=" + nome + "]";
     }
+
+    public List<Inquilino> getInquilinos() {
+        return inquilinos;
+    }
+
+
+    public void setInquilinos(List<Inquilino> inquilinos) {
+        this.inquilinos = inquilinos;
+    }
+
+
+    public List<Contrato> getContratos() {
+        return contratos;
+    }
+
+
+    public void setContratos(List<Contrato> contratos) {
+        this.contratos = contratos;
+    }
+
+    
     
     
     

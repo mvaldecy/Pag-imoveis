@@ -1,6 +1,7 @@
 package com.adm.imoveis.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -23,8 +25,20 @@ public class Contrato {
     private LocalDate endDate;
 
     @ManyToOne
+    @JoinColumn(name = "imovel_id")
+    private Imovel imovel;
+
+    @ManyToOne
     @JoinColumn(name = "inquilino_id")
-    private Inquilino inquilino; // create relations
+    private Inquilino inquilino;
+
+    @ManyToOne
+    @JoinColumn(name = "imobiliaria_id")
+    private Imobiliaria imobiliaria;
+
+    @OneToMany(mappedBy = "contrato")
+    private List<Repasse> repasses;
+
 
     public Contrato() {}
 
@@ -57,6 +71,14 @@ public class Contrato {
         this.endDate = endDate;
     }
 
+    public Imovel getImovel() {
+        return imovel;
+    }
+
+    public void setImovel(Imovel imovel) {
+        this.imovel = imovel;
+    }
+
     public Inquilino getInquilino() {
         return inquilino;
     }
@@ -65,6 +87,23 @@ public class Contrato {
         this.inquilino = inquilino;
     }
 
+    public Imobiliaria getImobiliaria() {
+        return imobiliaria;
+    }
+
+    public void setImobiliaria(Imobiliaria imobiliaria) {
+        this.imobiliaria = imobiliaria;
+    }
+
+    public List<Repasse> getRepasses() {
+        return repasses;
+    }
+
+    public void setRepasses(List<Repasse> repasses) {
+        this.repasses = repasses;
+    }
+
+    
     
 
     

@@ -1,8 +1,8 @@
 package com.adm.imoveis.entities;
 
+
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -25,23 +24,16 @@ public class Inquilino {
 
 	private String nome;
 	private String cpf;
-	private String status; // criar interface
-
-
-	@OneToOne
-	@JoinColumn(name = "imovel_id")
-	private Imovel imovel;
-
+	private String status;
+	
 	@ManyToOne
 	@JoinColumn(name = "imobiliaria_id")
 	private Imobiliaria imobiliaria;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "inquilino")
-	private List<Repasse> repasse;
+	private List<Contrato> contratos;
 
-	@OneToMany(mappedBy = "inquilino")
-	List<Contrato> contratos;
+
 
 	public Inquilino() {}
 
@@ -91,23 +83,13 @@ public class Inquilino {
 		this.imobiliaria = imobiliaria;
 	}
 
-	public Imovel getImovel() {
-		return imovel;
+	public List<Contrato> getContratos() {
+		return contratos;
 	}
 
-	public void setImovel(Imovel imovel) {
-		this.imovel = imovel;
-	}
-
-	public List<Repasse> getRepasse() {
-		return repasse;
-	}
-
-	public void setRepasse(List<Repasse> repasse) {
-		this.repasse = repasse;
-	}
-
-	
+	public void setContratos(List<Contrato> contratos) {
+		this.contratos = contratos;
+	}	
 
 	
 

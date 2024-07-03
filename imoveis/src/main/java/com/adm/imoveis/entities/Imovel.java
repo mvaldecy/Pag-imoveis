@@ -1,5 +1,10 @@
 package com.adm.imoveis.entities;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -7,30 +12,30 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "imovel")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Imovel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "predio_id")
 	private Predio predio;
 
+	@OneToMany(mappedBy = "imovel")
+	private List<Contrato> contrato;
 	
 
 	private String tipo;
 	private int tamanho;
 	private String apto;
 	private String status;
-
-
-	@OneToOne(mappedBy = "imovel")
-	private Inquilino inquilino;
 
 	public Imovel() {}
 
@@ -89,15 +94,13 @@ public class Imovel {
 		this.status = status;
 	}
 
-	public Inquilino getInquilino() {
-		return inquilino;
+	public List<Contrato> getContrato() {
+		return contrato;
 	}
 
-	public void setInquilino(Inquilino inquilino) {
-		this.inquilino = inquilino;
-	}
-
-	
+	public void setContrato(List<Contrato> contrato) {
+		this.contrato = contrato;
+	}	
 
 	
 }

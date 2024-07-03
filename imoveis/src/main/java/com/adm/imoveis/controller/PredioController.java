@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adm.imoveis.dto.PredioCreationDto;
+import com.adm.imoveis.dto.PredioDto;
 import com.adm.imoveis.entities.Predio;
 import com.adm.imoveis.service.PredioService;
 
@@ -30,7 +31,7 @@ public class PredioController {
     }
 
     @GetMapping(value = "predio")
-    public ResponseEntity<List<Predio>> getAll() {
+    public ResponseEntity<List<PredioDto>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(predioService.getALl());
     }
     

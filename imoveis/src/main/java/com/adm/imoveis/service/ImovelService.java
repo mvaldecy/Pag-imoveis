@@ -29,25 +29,42 @@ public class ImovelService {
      * @param  imovel   the ImovelCreationDto used to create the new Imovel
      * @return          the created Imovel
      */
-    public Imovel create(ImovelCreationDto imovel) {
+    public ImovelDto create(ImovelCreationDto imovel) {
         Imovel newImovel = new Imovel(imovel.tipo(), imovel.tamanho(), imovel.apto(), imovel.status());
         Predio predio = predioRepository.findById(imovel.predioId()).orElseThrow(PredioNotFound::new);
         newImovel.setPredio(predio);
         Imovel createdImovel = imovelRepository.save(newImovel);
-        return createdImovel;
+        ImovelDto imovelResponse = convertImovelModeltoDto(createdImovel);
+        return imovelResponse;
     }
 
-    public List<Imovel> getAll() {
-        return imovelRepository.findAll();
+    private ImovelDto convertImovelModeltoDto(Imovel imovel) {
+        return new ImovelDto(
+            imovel.getId(),
+            imovel.getTipo(),
+            imovel.getTamanho(),
+            imovel.getApto(),
+            imovel.getStatus(),
+            imovel.getPredio().getNome()
+        );
     }
 
-    public List<Imovel> getByPredioId(Long predioId) { // testar
+    private List<ImovelDto> convertImovelModelListtoDto(List<Imovel> imoveis) {
+        List<ImovelDto> response = imoveis.stream().map((i) -> convertImovelModeltoDto(i)).toList();
+        return response;
+    }
+
+    public List<ImovelDto> getAll() {
+        return convertImovelModelListtoDto(imovelRepository.findAll());
+    }
+
+    public List<ImovelDto> getByPredioId(Long predioId) { // testar
         Predio predio = predioRepository.findById(predioId).orElseThrow(PredioNotFound::new);
         List<Imovel> imoveis = imovelRepository.findByPredio(predio);
-        return imoveis;
+        return convertImovelModelListtoDto(imoveis);
     }
 
-    public Imovel getById(Long id) {
-        return imovelRepository.findById(id).orElseThrow(ImovelNotFound::new);
+    public ImovelDto getById(Long id) {
+        return convertImovelModeltoDto(imovelRepository.findById(id).orElseThrow(ImovelNotFound::new));
     }
 }
