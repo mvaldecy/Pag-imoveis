@@ -1,5 +1,10 @@
 package com.adm.imoveis.dto;
 
-public record RepasseDto(Long id, String dataRepasse, Double valorRepasse, String predioNome, String imovelNome, String imobiliaria, String inquilinoNome) {
+public record RepasseDto(
+    Long id,
+    String dataRepasse,
+    Double valorRepasse,
+    String predioNome,
+    ContratoDto contratoDto) {
     
 }

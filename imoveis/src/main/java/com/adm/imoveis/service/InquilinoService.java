@@ -1,41 +1,55 @@
 package com.adm.imoveis.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+
+import com.adm.imoveis.dto.ImobiliariaDto;
 import com.adm.imoveis.dto.InquilinoCreationDto;
-import com.adm.imoveis.entities.Imobiliaria;
+import com.adm.imoveis.dto.InquilinoDto;
 import com.adm.imoveis.entities.Inquilino;
-import com.adm.imoveis.repositories.ImobiliariaRepository;
 import com.adm.imoveis.repositories.InquilinoRepository;
-import com.adm.imoveis.service.exception.ImobiliariaNotFound;
 import com.adm.imoveis.service.exception.InquilinoNotFound;
 
 @Service
 public class InquilinoService {
     private final InquilinoRepository inquilinoRepository;
-    private final ImobiliariaRepository imobiliariaRepository;
 
-    public InquilinoService(
-        InquilinoRepository inquilinoRepository,
-        ImobiliariaRepository imobiliariarRepository) {
+    public InquilinoService(InquilinoRepository inquilinoRepository) {
         this.inquilinoRepository = inquilinoRepository;
-        this.imobiliariaRepository = imobiliariarRepository;
     }
 
-    public Inquilino create(InquilinoCreationDto inquilino) {
+    private InquilinoDto convertModeltoDto(Inquilino inquilino) {
+        return new InquilinoDto(
+            inquilino.getId(),
+            inquilino.getCpf(),
+            inquilino.getNome(),
+            inquilino.getStatus(),
+            new ImobiliariaDto(
+                inquilino.getImobiliaria().getId(),
+                inquilino.getImobiliaria().getNome()
+                )
+        );
+    }
+
+    private List<InquilinoDto> convertModelListtoDto(List<Inquilino> inquilinos) {
+        return inquilinos.stream().map((i) -> convertModeltoDto(i)).collect(Collectors.toList());
+    }
+
+    public InquilinoDto create(InquilinoCreationDto inquilino) {
         Inquilino newInquilino = new Inquilino(inquilino.nome(), inquilino.cpf(), inquilino.status());
         
         Inquilino createdInquilino = inquilinoRepository.save(newInquilino);
-        return createdInquilino;
+        return convertModeltoDto(createdInquilino);
     }
 
-    public List<Inquilino> getAll() {
-        return inquilinoRepository.findAll();
+    public List<InquilinoDto> getAll() {
+        return convertModelListtoDto(inquilinoRepository.findAll());
     }
 
-    public Inquilino getById(Long id) {
+    public InquilinoDto getById(Long id) {
         Inquilino inquilino = inquilinoRepository.findById(id).orElseThrow(InquilinoNotFound::new);
-        return inquilino;
+        return convertModeltoDto(inquilino);
     }
 }

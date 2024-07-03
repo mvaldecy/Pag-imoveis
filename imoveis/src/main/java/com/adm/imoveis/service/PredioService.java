@@ -22,25 +22,42 @@ public class PredioService {
         this.imovelRepository = imovelRepository;
     }
 
-    public Predio create(PredioCreationDto predio) {
-        Predio newPredio = new Predio(predio.nome(), predio.endereco(), predio.latitude(), predio.longitude(), predio.link());
-        Predio createdPredio = predioRepository.save(newPredio);
-        return createdPredio;
+    public static PredioDto convertPredioModeltoDto(Predio predio) {
+        return new PredioDto(
+            predio.getId(),
+            predio.getNome(),
+            predio.getEndereco(),
+            predio.getLatitude(),
+            predio.getLongitude(),
+            predio.getLink(),
+            ImovelService.convertImovelModelListtoDto(predio.getImoveis())
+        );
     }
 
-    private List<PredioDto> convertPredioModeltoDto (List<Predio> predio) {
+    public PredioDto create(PredioCreationDto predio) {
+        Predio newPredio = new Predio(predio.nome(), predio.endereco(), predio.latitude(), predio.longitude(), predio.link());
+        Predio createdPredio = predioRepository.save(newPredio);
+        return convertPredioModeltoDto(createdPredio);
+    }
+
+    public static List<PredioDto> convertPredioModellisttoDto (List<Predio> predio) {
         List<PredioDto> predioDtoList = predio.stream().map((i)-> new PredioDto(i.getId(),
-        i.getNome(), i.getEndereco(), i.getLatitude(), i.getLongitude(), i.getLink(), i.getImoveis())).collect(Collectors.toList());
+        i.getNome(),
+        i.getEndereco(),
+        i.getLatitude(),
+        i.getLongitude(),
+        i.getLink(),
+        ImovelService.convertImovelModelListtoDto(i.getImoveis()))).collect(Collectors.toList());
         return predioDtoList;
     }
 
 
     public List<PredioDto> getALl() {
         List<Predio> predios = predioRepository.findAll();
-        return convertPredioModeltoDto(predios);
+        return convertPredioModellisttoDto(predios);
     }
 
-    public Predio getById(Long id) {
-        return predioRepository.findById(id).orElseThrow(PredioNotFound::new);
+    public PredioDto getById(Long id) {
+        return convertPredioModeltoDto(predioRepository.findById(id).orElseThrow(PredioNotFound::new));
     }
 }

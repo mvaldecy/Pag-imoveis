@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adm.imoveis.dto.InquilinoCreationDto;
+import com.adm.imoveis.dto.InquilinoDto;
 import com.adm.imoveis.entities.Inquilino;
 import com.adm.imoveis.service.InquilinoService;
 
@@ -25,17 +26,17 @@ public class InquilinoController {
     }
 
     @PostMapping(value = "inquilino")
-    public ResponseEntity<Inquilino> create(@RequestBody InquilinoCreationDto inquilino) {
+    public ResponseEntity<InquilinoDto> create(@RequestBody InquilinoCreationDto inquilino) {
         return ResponseEntity.status(HttpStatus.CREATED).body(inquilinoService.create(inquilino));
     }
 
     @GetMapping(value = "inquilino/{id}")
-    public ResponseEntity<Inquilino> getById(@PathVariable Long id) {
+    public ResponseEntity<InquilinoDto> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(inquilinoService.getById(id));
     }
 
     @GetMapping(value = "inqulino")
-    public ResponseEntity<List<Inquilino>> getAll() {
+    public ResponseEntity<List<InquilinoDto>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(inquilinoService.getAll());
     }
 }

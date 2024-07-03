@@ -1,11 +1,13 @@
 package com.adm.imoveis.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.adm.imoveis.dto.ImovelCreationDto;
 import com.adm.imoveis.dto.ImovelDto;
+import com.adm.imoveis.dto.PredioDto;
 import com.adm.imoveis.entities.Imovel;
 import com.adm.imoveis.entities.Predio;
 import com.adm.imoveis.repositories.ImovelRepository;
@@ -38,19 +40,27 @@ public class ImovelService {
         return imovelResponse;
     }
 
-    private ImovelDto convertImovelModeltoDto(Imovel imovel) {
+    public static ImovelDto convertImovelModeltoDto(Imovel imovel) {
         return new ImovelDto(
             imovel.getId(),
             imovel.getTipo(),
             imovel.getTamanho(),
             imovel.getApto(),
             imovel.getStatus(),
-            imovel.getPredio().getNome()
+            new PredioDto(
+                imovel.getPredio().getId(),
+                imovel.getPredio().getNome(),
+                imovel.getPredio().getEndereco(),
+                imovel.getPredio().getLatitude(),
+                imovel.getPredio().getLongitude(),
+                imovel.getPredio().getLink(),
+                convertImovelModelListtoDto(imovel.getPredio().getImoveis())
+            )
         );
     }
 
-    private List<ImovelDto> convertImovelModelListtoDto(List<Imovel> imoveis) {
-        List<ImovelDto> response = imoveis.stream().map((i) -> convertImovelModeltoDto(i)).toList();
+    public static List<ImovelDto> convertImovelModelListtoDto(List<Imovel> imoveis) {
+        List<ImovelDto> response = imoveis.stream().map((i) -> convertImovelModeltoDto(i)).collect(Collectors.toList());
         return response;
     }
 

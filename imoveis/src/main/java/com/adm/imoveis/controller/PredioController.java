@@ -26,7 +26,7 @@ public class PredioController {
     }
 
     @PostMapping(value = "predio")
-    public ResponseEntity<Predio> create(@RequestBody PredioCreationDto predio) {
+    public ResponseEntity<PredioDto> create(@RequestBody PredioCreationDto predio) {
         return ResponseEntity.status(HttpStatus.CREATED).body(predioService.create(predio));
     }
 
@@ -36,7 +36,7 @@ public class PredioController {
     }
     
     @GetMapping(value = "predio/{id}")
-    public ResponseEntity<Predio> getById(@PathVariable Long id) {
+    public ResponseEntity<PredioDto> getById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(predioService.getById(id));
     }
 }
