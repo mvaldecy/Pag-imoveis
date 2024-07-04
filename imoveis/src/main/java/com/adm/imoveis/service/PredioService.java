@@ -30,7 +30,7 @@ public class PredioService {
             predio.getLatitude(),
             predio.getLongitude(),
             predio.getLink(),
-            ImovelService.convertImovelModelListtoDto(predio.getImoveis())
+            predio.getImoveis()
         );
     }
 
@@ -47,7 +47,8 @@ public class PredioService {
         i.getLatitude(),
         i.getLongitude(),
         i.getLink(),
-        ImovelService.convertImovelModelListtoDto(i.getImoveis()))).collect(Collectors.toList());
+        i.getImoveis()
+        )).collect(Collectors.toList());
         return predioDtoList;
     }
 

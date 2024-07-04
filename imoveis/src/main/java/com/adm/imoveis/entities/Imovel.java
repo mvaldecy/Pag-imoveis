@@ -28,6 +28,7 @@ public class Imovel {
 	@JoinColumn(name = "predio_id")
 	private Predio predio;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "imovel")
 	private List<Contrato> contrato;
 	

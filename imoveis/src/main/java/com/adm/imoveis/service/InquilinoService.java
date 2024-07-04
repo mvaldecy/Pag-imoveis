@@ -26,10 +26,7 @@ public class InquilinoService {
             inquilino.getCpf(),
             inquilino.getNome(),
             inquilino.getStatus(),
-            new ImobiliariaDto(
-                inquilino.getImobiliaria().getId(),
-                inquilino.getImobiliaria().getNome()
-                )
+            inquilino.getImobiliaria()
         );
     }
 

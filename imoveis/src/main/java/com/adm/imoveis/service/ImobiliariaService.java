@@ -27,7 +27,7 @@ public class ImobiliariaService {
   public ImobiliariaDto create(ImobiliariaCreationDto imobiliaria) {
     Imobiliaria newImobiliaria = new Imobiliaria(imobiliaria.nome());
     Imobiliaria createdImobiliaria = imobiliariaRepository.save(newImobiliaria);
-    return new ImobiliariaDto(createdImobiliaria.getId(), createdImobiliaria.getNome());
+    return new ImobiliariaDto(createdImobiliaria.getId(), createdImobiliaria.getNome(), createdImobiliaria.getInquilinos(), createdImobiliaria.getContratos());
   }
 
   public List<ImobiliariaDto> getAll() {

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class DtoUtils {
     public static ImobiliariaDto imobiliariaModelToDto(Imobiliaria imobiliaria) {
-        return new ImobiliariaDto(imobiliaria.getId(), imobiliaria.getNome());
+        return new ImobiliariaDto(imobiliaria.getId(), imobiliaria.getNome(), imobiliaria.getInquilinos(), imobiliaria.getContratos());
     }
 
     /**
@@ -16,6 +16,6 @@ public class DtoUtils {
      * @return                  a list of ImobiliariaDto objects
      */
     public static List<ImobiliariaDto> imobiliariaModelListtoDtoList(List<Imobiliaria> imobiliariaList) {
-        return imobiliariaList.stream().map((i) -> new ImobiliariaDto(i.getId(), i.getNome())).collect(Collectors.toList());
+        return imobiliariaList.stream().map((i) -> new ImobiliariaDto(i.getId(), i.getNome(), i.getInquilinos(), i.getContratos())).collect(Collectors.toList());
     }
 }

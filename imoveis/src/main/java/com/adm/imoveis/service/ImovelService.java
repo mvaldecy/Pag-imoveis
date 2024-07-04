@@ -47,15 +47,7 @@ public class ImovelService {
             imovel.getTamanho(),
             imovel.getApto(),
             imovel.getStatus(),
-            new PredioDto(
-                imovel.getPredio().getId(),
-                imovel.getPredio().getNome(),
-                imovel.getPredio().getEndereco(),
-                imovel.getPredio().getLatitude(),
-                imovel.getPredio().getLongitude(),
-                imovel.getPredio().getLink(),
-                convertImovelModelListtoDto(imovel.getPredio().getImoveis())
-            )
+            imovel.getPredio()
         );
     }
 

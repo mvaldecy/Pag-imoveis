@@ -3,6 +3,7 @@ package com.adm.imoveis.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -28,8 +29,10 @@ public class Inquilino {
 	
 	@ManyToOne
 	@JoinColumn(name = "imobiliaria_id")
+	@JsonIgnore
 	private Imobiliaria imobiliaria;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "inquilino")
 	private List<Contrato> contratos;
 

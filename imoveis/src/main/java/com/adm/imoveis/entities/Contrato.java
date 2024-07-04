@@ -3,6 +3,9 @@ package com.adm.imoveis.entities;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,6 +17,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "contrato")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Contrato {
     
     @Id
@@ -26,16 +30,20 @@ public class Contrato {
 
     @ManyToOne
     @JoinColumn(name = "imovel_id")
+    @JsonIgnore
     private Imovel imovel;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "inquilino_id")
     private Inquilino inquilino;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "imobiliaria_id")
     private Imobiliaria imobiliaria;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "contrato")
     private List<Repasse> repasses;
 

@@ -3,6 +3,7 @@ package com.adm.imoveis.entities;
 import java.time.LocalDate;
 import java.time.YearMonth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -26,6 +27,7 @@ public class Repasse {
     private YearMonth dataRepasse;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "contrato_id")
     private Contrato contrato;
 
