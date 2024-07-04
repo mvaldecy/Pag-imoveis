@@ -40,4 +40,8 @@ public class ImobiliariaService {
 
     return DtoUtils.imobiliariaModelToDto(imobiliaria);
   }
+
+  public void deleteAll() {
+    imobiliariaRepository.deleteAll();
+  }
 }

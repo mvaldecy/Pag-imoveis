@@ -1,6 +1,7 @@
 package com.adm.imoveis.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.adm.imoveis.entities.Imobiliaria;
 import com.adm.imoveis.entities.Imovel;
@@ -12,9 +13,8 @@ public record ContratoDto(
     LocalDate starDate,
     LocalDate endDate,
     Imobiliaria imobiliaria,
-    Predio predio,
     Imovel imovel,
-    Repasse repasse
+    List<Repasse> repasse
     ) {
     
 }
