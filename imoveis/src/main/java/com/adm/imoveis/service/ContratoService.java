@@ -43,6 +43,15 @@ public class ContratoService {
         );
     }
 
+    /**
+     * Creates a new ContratoDto object based on the provided ContratoCreationDto.
+     *
+     * @param  contrato   the ContratoCreationDto containing the data for the new Contrato
+     * @return            the created ContratoDto object
+     * @throws ImobiliariaNotFound if the imobiliaria with the given ID is not found
+     * @throws ImovelNotFound if the imovel with the given ID is not found
+     * @throws InquilinoNotFound if the inquilino with the given ID is not found
+     */
     public ContratoDto create(ContratoCreationDto contrato) {
         Contrato newContrato = new Contrato(contrato.startDate(), contrato.endDate());
         newContrato.setImobiliaria(imobiliariaRepository.findById(contrato.imobiliariaId()).orElseThrow(ImobiliariaNotFound::new));
