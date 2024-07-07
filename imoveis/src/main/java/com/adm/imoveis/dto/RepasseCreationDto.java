@@ -1,5 +1,7 @@
 package com.adm.imoveis.dto;
 
-public record RepasseCreationDto( Double valorRepasse, String dataRepasse, Long contratoId) {
+import java.time.YearMonth;
+
+public record RepasseCreationDto( Double valorRepasse, YearMonth dataRepasse, Long contratoId) {
     
 }

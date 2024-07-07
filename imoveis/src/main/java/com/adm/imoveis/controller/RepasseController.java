@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adm.imoveis.dto.RepasseCreationDto;
+import com.adm.imoveis.dto.RepasseDto;
 import com.adm.imoveis.entities.Repasse;
 import com.adm.imoveis.service.RepasseService;
 
@@ -23,5 +24,13 @@ public class RepasseController {
         this.repasseService = repasseService;
     }
 
-    
+    @PostMapping(value = "repasse")
+    public ResponseEntity<RepasseDto> create(@RequestBody RepasseCreationDto repasse) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(repasseService.create(repasse));
+    }
+
+    @GetMapping(value = "repasse")
+    public ResponseEntity<List<RepasseDto>> getAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(repasseService.findAll());
+    }
 }
