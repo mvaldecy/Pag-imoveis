@@ -24,7 +24,7 @@ public class Repasse {
 
     private Double valorRepasse;
 
-    private YearMonth dataRepasse;
+    private LocalDate dataRepasse;
 
     @ManyToOne
     @JsonIgnore
@@ -33,7 +33,7 @@ public class Repasse {
 
     public Repasse() {}
 
-    public Repasse(Double valorRepasse, YearMonth dataRepasse) {
+    public Repasse(Double valorRepasse, LocalDate dataRepasse) {
         this.valorRepasse = valorRepasse;
         this.dataRepasse = dataRepasse;
     }
@@ -54,11 +54,11 @@ public class Repasse {
         this.valorRepasse = valorRepasse;
     }
 
-    public YearMonth getDataRepasse() {
+    public LocalDate getDataRepasse() {
         return dataRepasse;
     }
 
-    public void setDataRepasse(YearMonth dataRepasse) {
+    public void setDataRepasse(LocalDate dataRepasse) {
         this.dataRepasse = dataRepasse;
     }
 

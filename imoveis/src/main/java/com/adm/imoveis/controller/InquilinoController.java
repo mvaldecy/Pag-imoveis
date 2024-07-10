@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.adm.imoveis.dto.InquilinoCreationDto;
@@ -38,5 +39,10 @@ public class InquilinoController {
     @GetMapping(value = "inqulino")
     public ResponseEntity<List<InquilinoDto>> getAll() {
         return ResponseEntity.status(HttpStatus.OK).body(inquilinoService.getAll());
+    }
+
+    @GetMapping(value = "inquilinoByCpf")
+    public ResponseEntity<InquilinoDto> findByCpf(@RequestParam(value = "Cpf") String cpf) {
+        return ResponseEntity.ok(inquilinoService.finbyCpf(cpf));
     }
 }

@@ -12,4 +12,5 @@ import java.util.List;
 public interface ContratoRepository extends JpaRepository<Contrato, Long>{   
     List<Contrato> findByImobiliaria(Imobiliaria imobiliaria);
     List<Contrato> findByInquilino(Inquilino inquilino);
+    
 }

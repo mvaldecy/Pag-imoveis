@@ -8,16 +8,21 @@ import org.springframework.stereotype.Service;
 import com.adm.imoveis.dto.ImobiliariaDto;
 import com.adm.imoveis.dto.InquilinoCreationDto;
 import com.adm.imoveis.dto.InquilinoDto;
+import com.adm.imoveis.entities.Imobiliaria;
 import com.adm.imoveis.entities.Inquilino;
+import com.adm.imoveis.repositories.ImobiliariaRepository;
 import com.adm.imoveis.repositories.InquilinoRepository;
+import com.adm.imoveis.service.exception.ImobiliariaNotFound;
 import com.adm.imoveis.service.exception.InquilinoNotFound;
 
 @Service
 public class InquilinoService {
     private final InquilinoRepository inquilinoRepository;
+    private final ImobiliariaRepository imobiliariaRepository;
 
-    public InquilinoService(InquilinoRepository inquilinoRepository) {
+    public InquilinoService(InquilinoRepository inquilinoRepository, ImobiliariaRepository imobiliariaRepository) {
         this.inquilinoRepository = inquilinoRepository;
+        this.imobiliariaRepository = imobiliariaRepository;
     }
 
     private InquilinoDto convertModeltoDto(Inquilino inquilino) {
@@ -36,7 +41,8 @@ public class InquilinoService {
 
     public InquilinoDto create(InquilinoCreationDto inquilino) {
         Inquilino newInquilino = new Inquilino(inquilino.nome(), inquilino.cpf(), inquilino.status());
-        
+        Imobiliaria imobiliaria = imobiliariaRepository.findById(inquilino.imobiliariaId()).orElseThrow(ImobiliariaNotFound::new);
+        newInquilino.setImobiliaria(imobiliaria);
         Inquilino createdInquilino = inquilinoRepository.save(newInquilino);
         return convertModeltoDto(createdInquilino);
     }
@@ -48,5 +54,14 @@ public class InquilinoService {
     public InquilinoDto getById(Long id) {
         Inquilino inquilino = inquilinoRepository.findById(id).orElseThrow(InquilinoNotFound::new);
         return convertModeltoDto(inquilino);
+    }
+
+    public InquilinoDto finbyCpf(String cpf) {
+        Inquilino inquilino = inquilinoRepository.findByCpf(cpf);
+        if (inquilino == null) {
+            throw new InquilinoNotFound();
+        } else {
+            return convertModeltoDto(inquilino);
+        }
     }
 }
