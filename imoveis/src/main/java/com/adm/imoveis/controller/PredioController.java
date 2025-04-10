@@ -25,6 +25,12 @@ public class PredioController {
         this.predioService = predioService;
     }
 
+    /**
+     * Creates a new Predio based on the provided PredioCreationDto.
+     *
+     * @param  predio   the PredioCreationDto used to create the new Predio
+     * @return          the created Predio as a ResponseEntity with HTTP status CREATED
+     */
     @PostMapping(value = "predio")
     public ResponseEntity<PredioDto> create(@RequestBody PredioCreationDto predio) {
         return ResponseEntity.status(HttpStatus.CREATED).body(predioService.create(predio));
