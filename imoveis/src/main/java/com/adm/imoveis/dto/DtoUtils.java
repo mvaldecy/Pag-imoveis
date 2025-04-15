@@ -1,11 +1,16 @@
 package com.adm.imoveis.dto;
 
+import com.adm.imoveis.dto.contrato.ContratoDto;
 import com.adm.imoveis.dto.contrato.ContratoResumoDto;
 import com.adm.imoveis.dto.imobiliaria.ImobiliariaDto;
 import com.adm.imoveis.dto.imobiliaria.ImobiliariaResumoDto;
+import com.adm.imoveis.dto.imovel.ImovelDto;
 import com.adm.imoveis.dto.imovel.ImovelResumoDto;
+import com.adm.imoveis.dto.inquilino.InquilinoDto;
 import com.adm.imoveis.dto.inquilino.InquilinoResumoDto;
+import com.adm.imoveis.dto.predio.PredioDto;
 import com.adm.imoveis.dto.predio.PredioResumoDto;
+import com.adm.imoveis.dto.repasse.RepasseDto;
 import com.adm.imoveis.dto.repasse.RepasseResumoDto;
 import com.adm.imoveis.entities.Contrato;
 import com.adm.imoveis.entities.Imobiliaria;
@@ -22,7 +27,7 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
 
     // ------------------------------------ IMOBILIARIA ------------------------------------------
 
-    public static ImobiliariaResumoDto imobiliariModelToResumoDto(Imobiliaria imobiliaria) {
+    public static ImobiliariaResumoDto imobiliariaModelToResumoDto(Imobiliaria imobiliaria) {
         return new ImobiliariaResumoDto(
             imobiliaria.getId(),
             imobiliaria.getNome()
@@ -56,6 +61,17 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
         );
     }
 
+    public static InquilinoDto inquilinoModelToDto(Inquilino inquilino) {
+        return new InquilinoDto(
+            inquilino.getId(),
+            inquilino.getCpf(),
+            inquilino.getNome(),
+            inquilino.getStatus(),
+            imobiliariaModelToResumoDto(inquilino.getImobiliaria()),
+            convertModelList(inquilino.getContratos(), DtoUtils::contratoModelToResumoDto)
+        );
+    }
+
     // ------------------------------------ INQUILINO ------------------------------------------
 
 
@@ -70,6 +86,15 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             predio.getNome(),
             predio.getEndereco()
             );
+    }
+
+    public static PredioDto predioModelToDto(Predio predio) {
+        return new PredioDto(
+            predio.getId(),
+            predio.getNome(),
+            predio.getEndereco(),
+            convertModelList(predio.getImoveis(), DtoUtils::imovelModelToResumoDto)
+        );
     }
 
 
@@ -91,6 +116,17 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             imovel.getPredio().getId(),
             imovel.getPredio().getNome(),
             imovel.getPredio().getEndereco()
+        );
+    }
+
+    public static ImovelDto imovelModelToDto(Imovel imovel) {
+        return new ImovelDto(
+            imovel.getId(),
+            imovel.getTipo(),
+            imovel.getTamanho(),
+            imovel.getApto(),
+            imovel.getStatus(),
+            predioModelToResumoDto(imovel.getPredio())
         );
     }
 
@@ -120,6 +156,17 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
         );
     }
 
+    public static ContratoDto contratoModelToDto(Contrato contrato) {
+        return new ContratoDto(
+            contrato.getId(),
+            contrato.getStartDate(),
+            contrato.getEndDate(),
+            imobiliariaModelToResumoDto(contrato.getImobiliaria()),
+            imovelModelToResumoDto(contrato.getImovel()),
+            convertModelList(contrato.getRepasses(), DtoUtils::repasseModelToResumoDto)
+        );
+    }
+
     // ------------------------------------ CONTRATO ------------------------------------------
 
 
@@ -128,11 +175,20 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
 
     // ------------------------------------ REPASSE ------------------------------------------
 
-    public static RepasseResumoDto RepasseModelToResumoDto(Repasse repasse) {
+    public static RepasseResumoDto repasseModelToResumoDto(Repasse repasse) {
         return new RepasseResumoDto(
             repasse.getId(),
             repasse.getDataRepasse(),
             repasse.getValorRepasse()
+        );
+    }
+
+    public static RepasseDto repasseModelToDto(Repasse repasse) {
+        return new RepasseDto(
+            repasse.getId(),
+            repasse.getDataRepasse(),
+            repasse.getValorRepasse(),
+            contratoModelToResumoDto(repasse.getContrato())
         );
     }
 
