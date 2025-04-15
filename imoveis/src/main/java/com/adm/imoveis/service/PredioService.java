@@ -1,7 +1,6 @@
 package com.adm.imoveis.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -9,18 +8,16 @@ import com.adm.imoveis.dto.DtoUtils;
 import com.adm.imoveis.dto.predio.PredioCreationDto;
 import com.adm.imoveis.dto.predio.PredioDto;
 import com.adm.imoveis.entities.Predio;
-import com.adm.imoveis.repositories.ImovelRepository;
 import com.adm.imoveis.repositories.PredioRepository;
 import com.adm.imoveis.service.exception.PredioNotFound;
 
 @Service
 public class PredioService {
     private final PredioRepository predioRepository;
-    private final ImovelRepository imovelRepository;
 
-    public PredioService(PredioRepository predioRepository, ImovelRepository imovelRepository) {
+
+    public PredioService(PredioRepository predioRepository) {
         this.predioRepository = predioRepository;
-        this.imovelRepository = imovelRepository;
     }
 
 
