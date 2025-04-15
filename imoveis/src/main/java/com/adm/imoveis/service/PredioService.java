@@ -27,32 +27,27 @@ public class PredioService {
             predio.getId(),
             predio.getNome(),
             predio.getEndereco(),
-            predio.getLatitude(),
-            predio.getLongitude(),
-            predio.getLink(),
             predio.getImoveis()
         );
     }
 
-    public PredioDto create(PredioCreationDto predio) {
-        Predio newPredio = new Predio(predio.nome(), predio.endereco(), predio.latitude(), predio.longitude(), predio.link());
-        Predio createdPredio = predioRepository.save(newPredio);
-        return convertPredioModeltoDto(createdPredio);
-    }
-
+    
     public static List<PredioDto> convertPredioModellisttoDto (List<Predio> predio) {
-        List<PredioDto> predioDtoList = predio.stream().map((i)-> new PredioDto(i.getId(),
+        List<PredioDto> predioDtoList = predio.stream().map((i)-> new PredioDto(
+        i.getId(),
         i.getNome(),
         i.getEndereco(),
-        i.getLatitude(),
-        i.getLongitude(),
-        i.getLink(),
         i.getImoveis()
         )).collect(Collectors.toList());
         return predioDtoList;
     }
-
-
+    
+    public PredioDto create(PredioCreationDto predio) {
+        Predio newPredio = new Predio(predio.nome(), predio.endereco());
+        Predio createdPredio = predioRepository.save(newPredio);
+        return convertPredioModeltoDto(createdPredio);
+    }
+    
     public List<PredioDto> getALl() {
         List<Predio> predios = predioRepository.findAll();
         return convertPredioModellisttoDto(predios);

@@ -37,7 +37,7 @@ public class ContratoService {
         this.inquilinoRepository = inquilinoRepository;
     }
 
-    public ContratoDto convertModeltoDto(Contrato contrato) {
+    public static ContratoDto convertModeltoDto(Contrato contrato) {
         return new ContratoDto(
             contrato.getId(),
             contrato.getStartDate(),
@@ -48,7 +48,7 @@ public class ContratoService {
         );
     }
 
-    public List<ContratoDto> convertModelListToDto(List<Contrato> contratos) {
+    public static List<ContratoDto> convertModelListToDto(List<Contrato> contratos) {
         return contratos.stream().map((i) -> convertModeltoDto(i)).toList();
     }
 

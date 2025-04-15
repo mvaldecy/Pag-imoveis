@@ -22,9 +22,6 @@ public class Predio {
 
 	private String nome;
 	private String endereco;
-	private String latitude;
-	private String longitude;
-	private String link;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "predio")
@@ -33,12 +30,9 @@ public class Predio {
 
 	public Predio() {}
 
-	public Predio(String nome, String endereco, String latitude, String longitude, String link) {
+	public Predio(String nome, String endereco) {
 		this.nome = nome;
 		this.endereco = endereco;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.link = link;
 	}
 	public Long getId() {
 		return id;
@@ -58,24 +52,7 @@ public class Predio {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-	public String getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(String latitude) {
-		this.latitude = latitude;
-	}
-	public String getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(String longitude) {
-		this.longitude = longitude;
-	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
+	
 	public List<Imovel> getImoveis() {
 		return imoveis;
 	}

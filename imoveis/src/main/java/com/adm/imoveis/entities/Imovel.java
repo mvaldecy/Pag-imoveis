@@ -32,7 +32,7 @@ public class Imovel {
 	@OneToMany(mappedBy = "imovel")
 	private List<Contrato> contrato;
 	
-
+	private Double valor;
 	private String tipo;
 	private int tamanho;
 	private String apto;
@@ -40,11 +40,12 @@ public class Imovel {
 
 	public Imovel() {}
 
-	public Imovel(String tipo, int tamanho, String apto, String status) {
+	public Imovel(String tipo, int tamanho, String apto, String status, Double valor) {
 		this.tipo = tipo;
 		this.tamanho = tamanho;
 		this.apto = apto;
 		this.status = status;
+		this.valor = valor;
 	}
 
 	public Long getId() {
@@ -101,7 +102,17 @@ public class Imovel {
 
 	public void setContrato(List<Contrato> contrato) {
 		this.contrato = contrato;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}	
+
+	
 
 	
 }
