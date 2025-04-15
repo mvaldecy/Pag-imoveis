@@ -29,6 +29,15 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
         );
     }
 
+    public static ImobiliariaDto imobiliariaModelToDto(Imobiliaria imobiliaria) {
+        return new ImobiliariaDto(
+            imobiliaria.getId(),
+            imobiliaria.getNome(),
+            convertModelList(imobiliaria.getInquilinos(), DtoUtils::inquilinoModelToResumoDto),
+            convertModelList(imobiliaria.getContratos(), DtoUtils::contratoModelToResumoDto)
+        );
+    }
+
 
     // ------------------------------------ IMOBILIARIA ------------------------------------------
 
