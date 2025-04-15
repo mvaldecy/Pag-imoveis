@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.adm.imoveis.dto.DtoUtils;
 import com.adm.imoveis.dto.imobiliaria.ImobiliariaDto;
 import com.adm.imoveis.dto.inquilino.InquilinoCreationDto;
 import com.adm.imoveis.dto.inquilino.InquilinoDto;
@@ -25,43 +26,28 @@ public class InquilinoService {
         this.imobiliariaRepository = imobiliariaRepository;
     }
 
-    private InquilinoDto convertModeltoDto(Inquilino inquilino) {
-        return new InquilinoDto(
-            inquilino.getId(),
-            inquilino.getCpf(),
-            inquilino.getNome(),
-            inquilino.getStatus(),
-            inquilino.getImobiliaria()
-        );
-    }
 
-    private List<InquilinoDto> convertModelListtoDto(List<Inquilino> inquilinos) {
-        return inquilinos.stream().map((i) -> convertModeltoDto(i)).collect(Collectors.toList());
-    }
 
     public InquilinoDto create(InquilinoCreationDto inquilino) {
         Inquilino newInquilino = new Inquilino(inquilino.nome(), inquilino.cpf(), inquilino.status());
         Imobiliaria imobiliaria = imobiliariaRepository.findById(inquilino.imobiliariaId()).orElseThrow(ImobiliariaNotFound::new);
         newInquilino.setImobiliaria(imobiliaria);
         Inquilino createdInquilino = inquilinoRepository.save(newInquilino);
-        return convertModeltoDto(createdInquilino);
+        return DtoUtils.inquilinoModelToDto(createdInquilino);
     }
 
     public List<InquilinoDto> getAll() {
-        return convertModelListtoDto(inquilinoRepository.findAll());
+        List<Inquilino> inquilinoList = inquilinoRepository.findAll();
+        return DtoUtils.convertModelList(inquilinoList, DtoUtils::inquilinoModelToDto);
     }
 
     public InquilinoDto getById(Long id) {
         Inquilino inquilino = inquilinoRepository.findById(id).orElseThrow(InquilinoNotFound::new);
-        return convertModeltoDto(inquilino);
+        return DtoUtils.inquilinoModelToDto(inquilino);
     }
 
     public InquilinoDto finbyCpf(String cpf) {
-        Inquilino inquilino = inquilinoRepository.findByCpf(cpf);
-        if (inquilino == null) {
-            throw new InquilinoNotFound();
-        } else {
-            return convertModeltoDto(inquilino);
-        }
+        Inquilino inquilino = inquilinoRepository.findByCpf(cpf).orElseThrow(InquilinoNotFound::new);
+        return DtoUtils.inquilinoModelToDto(inquilino);
     }
 }
