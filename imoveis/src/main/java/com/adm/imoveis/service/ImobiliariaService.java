@@ -28,12 +28,12 @@ public class ImobiliariaService {
   public ImobiliariaDto create(ImobiliariaCreationDto imobiliaria) { // #TODO - usar conversor de DTO
     Imobiliaria newImobiliaria = new Imobiliaria(imobiliaria.nome());
     Imobiliaria createdImobiliaria = imobiliariaRepository.save(newImobiliaria);
-    return new ImobiliariaDto(createdImobiliaria.getId(), createdImobiliaria.getNome(), createdImobiliaria.getInquilinos(), createdImobiliaria.getContratos());
+    return DtoUtils.imobiliariaModelToDto(createdImobiliaria);
   }
 
   public List<ImobiliariaDto> getAll() {
     List<Imobiliaria> imobiliariaList = imobiliariaRepository.findAll();
-    return DtoUtils.imobiliariaModelListtoDtoList(imobiliariaList);
+    return DtoUtils.convertModelList(imobiliariaList, DtoUtils::imobiliariaModelToDto);
   }
 
   public ImobiliariaDto getById(Long id) {
@@ -59,7 +59,7 @@ public class ImobiliariaService {
 
   public List<ContratoDto> getContratosByImobiliariaId(Long id) {
     Imobiliaria imobiliaria = imobiliariaRepository.findById(id).orElseThrow(ImobiliariaNotFound::new);
-    return ContratoService.convertModelListToDto(imobiliaria.getContratos());
+    return DtoUtils.convertModelList(imobiliaria.getContratos(), DtoUtils::contratoModelToDto);
   }
 
 
