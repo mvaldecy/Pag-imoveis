@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adm.imoveis.dto.ImovelCreationDto;
-import com.adm.imoveis.dto.ImovelDto;
+import com.adm.imoveis.dto.imovel.ImovelCreationDto;
+import com.adm.imoveis.dto.imovel.ImovelDto;
 import com.adm.imoveis.entities.Imovel;
 import com.adm.imoveis.service.ImovelService;
 

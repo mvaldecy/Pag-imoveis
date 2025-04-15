@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adm.imoveis.dto.InquilinoCreationDto;
-import com.adm.imoveis.dto.InquilinoDto;
+import com.adm.imoveis.dto.inquilino.InquilinoCreationDto;
+import com.adm.imoveis.dto.inquilino.InquilinoDto;
 import com.adm.imoveis.entities.Inquilino;
 import com.adm.imoveis.service.InquilinoService;
 

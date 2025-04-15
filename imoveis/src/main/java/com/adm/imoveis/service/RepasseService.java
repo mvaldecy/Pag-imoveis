@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.adm.imoveis.dto.RepasseCreationDto;
-import com.adm.imoveis.dto.RepasseDto;
+import com.adm.imoveis.dto.repasse.RepasseCreationDto;
+import com.adm.imoveis.dto.repasse.RepasseDto;
 import com.adm.imoveis.entities.Contrato;
 import com.adm.imoveis.entities.Repasse;
 import com.adm.imoveis.repositories.ContratoRepository;

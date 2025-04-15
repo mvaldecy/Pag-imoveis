@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adm.imoveis.dto.ContratoCreationDto;
-import com.adm.imoveis.dto.ContratoDto;
+import com.adm.imoveis.dto.contrato.ContratoCreationDto;
+import com.adm.imoveis.dto.contrato.ContratoDto;
 import com.adm.imoveis.service.ContratoService;
 
 @RestController

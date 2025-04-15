@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adm.imoveis.dto.RepasseCreationDto;
-import com.adm.imoveis.dto.RepasseDto;
+import com.adm.imoveis.dto.repasse.RepasseCreationDto;
+import com.adm.imoveis.dto.repasse.RepasseDto;
 import com.adm.imoveis.entities.Repasse;
 import com.adm.imoveis.service.RepasseService;
 

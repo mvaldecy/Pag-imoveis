@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adm.imoveis.dto.PredioCreationDto;
-import com.adm.imoveis.dto.PredioDto;
+import com.adm.imoveis.dto.predio.PredioCreationDto;
+import com.adm.imoveis.dto.predio.PredioDto;
 import com.adm.imoveis.entities.Predio;
 import com.adm.imoveis.service.PredioService;
 

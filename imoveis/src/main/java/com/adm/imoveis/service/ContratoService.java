@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.adm.imoveis.dto.ContratoCreationDto;
-import com.adm.imoveis.dto.ContratoDto;
+import com.adm.imoveis.dto.contrato.ContratoCreationDto;
+import com.adm.imoveis.dto.contrato.ContratoDto;
 import com.adm.imoveis.entities.Contrato;
 import com.adm.imoveis.entities.Imobiliaria;
 import com.adm.imoveis.entities.Inquilino;

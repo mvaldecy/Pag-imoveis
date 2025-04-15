@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.adm.imoveis.dto.ImobiliariaDto;
-import com.adm.imoveis.dto.InquilinoCreationDto;
-import com.adm.imoveis.dto.InquilinoDto;
+import com.adm.imoveis.dto.imobiliaria.ImobiliariaDto;
+import com.adm.imoveis.dto.inquilino.InquilinoCreationDto;
+import com.adm.imoveis.dto.inquilino.InquilinoDto;
 import com.adm.imoveis.entities.Imobiliaria;
 import com.adm.imoveis.entities.Inquilino;
 import com.adm.imoveis.repositories.ImobiliariaRepository;

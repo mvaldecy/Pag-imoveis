@@ -1,11 +1,13 @@
 package com.adm.imoveis.entities;
 
-import java.time.LocalDate;
+
 import java.time.YearMonth;
 
+import com.adm.imoveis.entities.Utils.YearMonthConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,7 +26,8 @@ public class Repasse {
 
     private Double valorRepasse;
 
-    private LocalDate dataRepasse;
+    @Convert(converter = YearMonthConverter.class)
+    private YearMonth dataRepasse;
 
     @ManyToOne
     @JsonIgnore
@@ -33,7 +36,7 @@ public class Repasse {
 
     public Repasse() {}
 
-    public Repasse(Double valorRepasse, LocalDate dataRepasse) {
+    public Repasse(Double valorRepasse, YearMonth dataRepasse) {
         this.valorRepasse = valorRepasse;
         this.dataRepasse = dataRepasse;
     }
@@ -54,11 +57,11 @@ public class Repasse {
         this.valorRepasse = valorRepasse;
     }
 
-    public LocalDate getDataRepasse() {
+    public YearMonth getDataRepasse() {
         return dataRepasse;
     }
 
-    public void setDataRepasse(LocalDate dataRepasse) {
+    public void setDataRepasse(YearMonth dataRepasse) {
         this.dataRepasse = dataRepasse;
     }
 

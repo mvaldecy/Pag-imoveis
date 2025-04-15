@@ -1,4 +1,4 @@
-package com.adm.imoveis.dto;
+package com.adm.imoveis.dto.contrato;
 import java.time.LocalDate;
 
 

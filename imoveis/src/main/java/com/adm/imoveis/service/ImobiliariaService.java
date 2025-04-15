@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.adm.imoveis.dto.ContratoDto;
 import com.adm.imoveis.dto.DtoUtils;
-import com.adm.imoveis.dto.ImobiliariaCreationDto;
-import com.adm.imoveis.dto.ImobiliariaDto;
+import com.adm.imoveis.dto.contrato.ContratoDto;
+import com.adm.imoveis.dto.imobiliaria.ImobiliariaCreationDto;
+import com.adm.imoveis.dto.imobiliaria.ImobiliariaDto;
 import com.adm.imoveis.entities.Imobiliaria;
 import com.adm.imoveis.repositories.ImobiliariaRepository;
 import com.adm.imoveis.service.exception.ImobiliariaNotFound;

@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import com.adm.imoveis.dto.PredioCreationDto;
-import com.adm.imoveis.dto.PredioDto;
+import com.adm.imoveis.dto.predio.PredioCreationDto;
+import com.adm.imoveis.dto.predio.PredioDto;
 import com.adm.imoveis.entities.Predio;
 import com.adm.imoveis.repositories.ImovelRepository;
 import com.adm.imoveis.repositories.PredioRepository;
