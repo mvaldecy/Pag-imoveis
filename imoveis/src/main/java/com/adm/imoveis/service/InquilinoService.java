@@ -1,12 +1,11 @@
 package com.adm.imoveis.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 import org.springframework.stereotype.Service;
 
 import com.adm.imoveis.dto.DtoUtils;
-import com.adm.imoveis.dto.imobiliaria.ImobiliariaDto;
 import com.adm.imoveis.dto.inquilino.InquilinoCreationDto;
 import com.adm.imoveis.dto.inquilino.InquilinoDto;
 import com.adm.imoveis.entities.Imobiliaria;
