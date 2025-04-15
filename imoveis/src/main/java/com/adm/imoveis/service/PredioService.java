@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.adm.imoveis.dto.DtoUtils;
 import com.adm.imoveis.dto.predio.PredioCreationDto;
 import com.adm.imoveis.dto.predio.PredioDto;
 import com.adm.imoveis.entities.Predio;
@@ -22,38 +23,21 @@ public class PredioService {
         this.imovelRepository = imovelRepository;
     }
 
-    public static PredioDto convertPredioModeltoDto(Predio predio) {
-        return new PredioDto(
-            predio.getId(),
-            predio.getNome(),
-            predio.getEndereco(),
-            predio.getImoveis()
-        );
-    }
 
-    
-    public static List<PredioDto> convertPredioModellisttoDto (List<Predio> predio) {
-        List<PredioDto> predioDtoList = predio.stream().map((i)-> new PredioDto(
-        i.getId(),
-        i.getNome(),
-        i.getEndereco(),
-        i.getImoveis()
-        )).collect(Collectors.toList());
-        return predioDtoList;
-    }
-    
     public PredioDto create(PredioCreationDto predio) {
         Predio newPredio = new Predio(predio.nome(), predio.endereco());
         Predio createdPredio = predioRepository.save(newPredio);
-        return convertPredioModeltoDto(createdPredio);
+        return DtoUtils.predioModelToDto(createdPredio);
     }
     
     public List<PredioDto> getALl() {
         List<Predio> predios = predioRepository.findAll();
-        return convertPredioModellisttoDto(predios);
+        return DtoUtils.convertModelList(predios, DtoUtils::predioModelToDto);
     }
 
     public PredioDto getById(Long id) {
-        return convertPredioModeltoDto(predioRepository.findById(id).orElseThrow(PredioNotFound::new));
+        Predio predio = predioRepository.findById(id).orElseThrow(PredioNotFound::new);
+        return DtoUtils.predioModelToDto(predio);
+
     }
 }
