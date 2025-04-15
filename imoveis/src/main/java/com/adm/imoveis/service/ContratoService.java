@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.adm.imoveis.dto.DtoUtils;
 import com.adm.imoveis.dto.contrato.ContratoCreationDto;
 import com.adm.imoveis.dto.contrato.ContratoDto;
 import com.adm.imoveis.entities.Contrato;
@@ -37,21 +38,6 @@ public class ContratoService {
         this.inquilinoRepository = inquilinoRepository;
     }
 
-    public static ContratoDto convertModeltoDto(Contrato contrato) {
-        return new ContratoDto(
-            contrato.getId(),
-            contrato.getStartDate(),
-            contrato.getEndDate(),
-            contrato.getImobiliaria(),
-            contrato.getImovel(),
-            contrato.getRepasses()
-        );
-    }
-
-    public static List<ContratoDto> convertModelListToDto(List<Contrato> contratos) {
-        return contratos.stream().map((i) -> convertModeltoDto(i)).toList();
-    }
-
     /**
      * Creates a new ContratoDto object based on the provided ContratoCreationDto.
      *
@@ -67,23 +53,23 @@ public class ContratoService {
         newContrato.setImovel(imovelRepository.findById(contrato.imovelId()).orElseThrow(ImovelNotFound::new));
         newContrato.setInquilino(inquilinoRepository.findById(contrato.inquilinoid()).orElseThrow(InquilinoNotFound::new));
         Contrato createdContrato = contratoRepository.save(newContrato);
-        return convertModeltoDto(createdContrato);
+        return DtoUtils.contratoModelToDto(createdContrato);
     }
 
     public List<ContratoDto> getall() {
         List<Contrato> contratos = contratoRepository.findAll();
-        return convertModelListToDto(contratos);
+        return DtoUtils.convertModelList(contratos, DtoUtils::contratoModelToDto);
     }
 
     public ContratoDto findByContratoId (Long contratoId) {
         Contrato contrato = contratoRepository.findById(contratoId).orElseThrow(ContratoNotFound::new);
-        return convertModeltoDto(contrato);
+        return DtoUtils.contratoModelToDto(contrato);
     }
 
     public List<ContratoDto> findByImobiliariaId(Long imobiliariaId) {
         Imobiliaria imobiliaria = imobiliariaRepository.findById(imobiliariaId).orElseThrow(ImobiliariaNotFound::new);
         List<Contrato> contratos = contratoRepository.findByImobiliaria(imobiliaria);
-        return convertModelListToDto(contratos);
+        return DtoUtils.convertModelList(contratos, DtoUtils::contratoModelToDto);
     }
 
     /**
@@ -96,7 +82,7 @@ public class ContratoService {
     public List<ContratoDto> findByInquilinoId(Long inquilinoId) {
         Inquilino inquilino = inquilinoRepository.findById(inquilinoId).orElseThrow(InquilinoNotFound::new);
         List<Contrato> contratos = contratoRepository.findByInquilino(inquilino);
-        return convertModelListToDto(contratos);
+        return DtoUtils.convertModelList(contratos, DtoUtils::contratoModelToDto);
     }
 
 
