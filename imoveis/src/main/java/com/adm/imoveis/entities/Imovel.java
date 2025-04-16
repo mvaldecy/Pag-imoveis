@@ -2,15 +2,21 @@ package com.adm.imoveis.entities;
 
 import java.util.List;
 
+import com.adm.imoveis.entities.enums.ImovelStatus;
+import com.adm.imoveis.entities.enums.ImovelTipo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -33,19 +39,31 @@ public class Imovel {
 	private List<Contrato> contrato;
 	
 	private Double valor;
-	private String tipo;
+
+	@Enumerated(EnumType.STRING)
+	private ImovelTipo tipo;
+
 	private int tamanho;
 	private String apto;
-	private String status;
+
+	@Enumerated(EnumType.STRING)
+	private ImovelStatus status;
+
+	@Lob
+	@Column(columnDefinition = "TEXT")
+	private String observacao;
+
+
 
 	public Imovel() {}
 
-	public Imovel(String tipo, int tamanho, String apto, String status, Double valor) {
+	public Imovel(ImovelTipo tipo, int tamanho, String apto, ImovelStatus status, Double valor, String observacao) {
 		this.tipo = tipo;
 		this.tamanho = tamanho;
 		this.apto = apto;
 		this.status = status;
 		this.valor = valor;
+		this.observacao = observacao;
 	}
 
 	public Long getId() {
@@ -64,11 +82,11 @@ public class Imovel {
 		this.predio = predio;
 	}
 
-	public String getTipo() {
+	public ImovelTipo getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(ImovelTipo tipo) {
 		this.tipo = tipo;
 	}
 
@@ -88,11 +106,11 @@ public class Imovel {
 		this.apto = apto;
 	}
 
-	public String getStatus() {
+	public ImovelStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(ImovelStatus status) {
 		this.status = status;
 	}
 
@@ -110,6 +128,14 @@ public class Imovel {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}	
 
 	

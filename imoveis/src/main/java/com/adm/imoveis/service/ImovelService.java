@@ -31,7 +31,7 @@ public class ImovelService {
      * @return          the created Imovel
      */
     public ImovelDto create(ImovelCreationDto imovel) {
-        Imovel newImovel = new Imovel(imovel.tipo(), imovel.tamanho(), imovel.apto(), imovel.status(), imovel.valor());
+        Imovel newImovel = new Imovel(imovel.tipo(), imovel.tamanho(), imovel.apto(), imovel.status(), imovel.valor(), imovel.observacao());
         Predio predio = predioRepository.findById(imovel.predioId()).orElseThrow(PredioNotFound::new);
         newImovel.setPredio(predio);
         Imovel createdImovel = imovelRepository.save(newImovel);

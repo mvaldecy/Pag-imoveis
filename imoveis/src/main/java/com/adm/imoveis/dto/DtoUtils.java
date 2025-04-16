@@ -115,7 +115,8 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             imovel.getTipo(),
             imovel.getPredio().getId(),
             imovel.getPredio().getNome(),
-            imovel.getPredio().getEndereco()
+            imovel.getPredio().getEndereco(),
+            imovel.getObservacao()
         );
     }
 
@@ -126,7 +127,8 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             imovel.getTamanho(),
             imovel.getApto(),
             imovel.getStatus(),
-            predioModelToResumoDto(imovel.getPredio())
+            predioModelToResumoDto(imovel.getPredio()),
+            imovel.getObservacao()
         );
     }
 
