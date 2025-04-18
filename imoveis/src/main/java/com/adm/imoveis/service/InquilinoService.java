@@ -45,8 +45,21 @@ public class InquilinoService {
         return DtoUtils.inquilinoModelToDto(inquilino);
     }
 
-    public InquilinoDto finbyCpf(String cpf) {
+    public InquilinoDto findByCpf(String cpf) {
         Inquilino inquilino = inquilinoRepository.findByCpf(cpf).orElseThrow(InquilinoNotFound::new);
         return DtoUtils.inquilinoModelToDto(inquilino);
+    }
+
+    public InquilinoDto update(Long id, InquilinoCreationDto body) {
+        Inquilino inquilino = inquilinoRepository.findById(id).orElseThrow(InquilinoNotFound::new);
+        inquilino.setNome(body.nome());
+        inquilino.setStatus(body.status());
+        inquilino.setCpf(body.cpf());
+        Inquilino updated = inquilinoRepository.save(inquilino);
+        return DtoUtils.inquilinoModelToDto(updated); 
+    }
+
+    public void deleteById(Long id) {
+        inquilinoRepository.deleteById(id);
     }
 }
