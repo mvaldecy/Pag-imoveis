@@ -128,7 +128,5 @@ public class ContratoService {
         List<Contrato> contratoList = contratoRepository.findByImovel(imovel);
         return DtoUtils.convertModelList(contratoList, DtoUtils::contratoModelToDto);
     }
-
-
     
 }

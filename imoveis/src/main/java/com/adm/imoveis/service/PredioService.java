@@ -37,4 +37,16 @@ public class PredioService {
         return DtoUtils.predioModelToDto(predio);
 
     }
+
+    public void deleteById(Long id) {
+        predioRepository.deleteById(id);
+    }
+
+    public PredioDto update(Long predioId, PredioCreationDto body) {
+        Predio predio = predioRepository.findById(predioId).orElseThrow(PredioNotFound::new);
+        predio.setNome(body.nome());
+        predio.setEndereco(body.endereco());
+        Predio updated = predioRepository.save(predio);
+        return DtoUtils.predioModelToDto(updated);
+    }
 }
