@@ -11,6 +11,7 @@ public record ContratoDto(
     Long id,
     LocalDate startDate,
     LocalDate endDate,
+    boolean active,
     ImobiliariaResumoDto imobiliaria,
     ImovelResumoDto imovel,
     List<RepasseResumoDto> repasse

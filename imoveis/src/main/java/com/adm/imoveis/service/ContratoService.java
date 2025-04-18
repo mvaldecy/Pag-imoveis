@@ -1,5 +1,6 @@
 package com.adm.imoveis.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,11 +10,13 @@ import com.adm.imoveis.dto.contrato.ContratoCreationDto;
 import com.adm.imoveis.dto.contrato.ContratoDto;
 import com.adm.imoveis.entities.Contrato;
 import com.adm.imoveis.entities.Imobiliaria;
+import com.adm.imoveis.entities.Imovel;
 import com.adm.imoveis.entities.Inquilino;
 import com.adm.imoveis.repositories.ContratoRepository;
 import com.adm.imoveis.repositories.ImobiliariaRepository;
 import com.adm.imoveis.repositories.ImovelRepository;
 import com.adm.imoveis.repositories.InquilinoRepository;
+import com.adm.imoveis.service.exception.BusinessException;
 import com.adm.imoveis.service.exception.ContratoNotFound;
 import com.adm.imoveis.service.exception.ImobiliariaNotFound;
 import com.adm.imoveis.service.exception.ImovelNotFound;
@@ -51,12 +54,12 @@ public class ContratoService {
         Contrato newContrato = new Contrato(contrato.startDate(), contrato.endDate());
         newContrato.setImobiliaria(imobiliariaRepository.findById(contrato.imobiliariaId()).orElseThrow(ImobiliariaNotFound::new));
         newContrato.setImovel(imovelRepository.findById(contrato.imovelId()).orElseThrow(ImovelNotFound::new));
-        newContrato.setInquilino(inquilinoRepository.findById(contrato.inquilinoid()).orElseThrow(InquilinoNotFound::new));
+        newContrato.setInquilino(inquilinoRepository.findById(contrato.inquilinoId()).orElseThrow(InquilinoNotFound::new));
         Contrato createdContrato = contratoRepository.save(newContrato);
         return DtoUtils.contratoModelToDto(createdContrato);
     }
 
-    public List<ContratoDto> getall() {
+    public List<ContratoDto> getAll() {
         List<Contrato> contratos = contratoRepository.findAll();
         return DtoUtils.convertModelList(contratos, DtoUtils::contratoModelToDto);
     }
@@ -65,6 +68,7 @@ public class ContratoService {
         Contrato contrato = contratoRepository.findById(contratoId).orElseThrow(ContratoNotFound::new);
         return DtoUtils.contratoModelToDto(contrato);
     }
+
 
     public List<ContratoDto> findByImobiliariaId(Long imobiliariaId) {
         Imobiliaria imobiliaria = imobiliariaRepository.findById(imobiliariaId).orElseThrow(ImobiliariaNotFound::new);
@@ -85,6 +89,45 @@ public class ContratoService {
         return DtoUtils.convertModelList(contratos, DtoUtils::contratoModelToDto);
     }
 
+    public ContratoDto extend(Long id, LocalDate endDate) {
+        Contrato contrato = contratoRepository.findById(id).orElseThrow(ContratoNotFound::new);
+        contrato.setEndDate(endDate);
+        Contrato newContrato = contratoRepository.save(contrato);
+        return DtoUtils.contratoModelToDto(newContrato);
+    }
+
+    public void deleteById(Long id) {
+        Contrato contrato = contratoRepository.findById(id).orElseThrow(ContratoNotFound::new);
+        if (contrato.isActive()) {
+            throw new BusinessException("Nao é permitido excluir um contrato ativo.");
+        }
+        contratoRepository.deleteById(id);
+    }
+
+    public List<ContratoDto> findByIsActive(boolean isActive) {
+        List<Contrato> contratoList = contratoRepository.findByIsActive(isActive);
+        return DtoUtils.convertModelList(contratoList, DtoUtils::contratoModelToDto);
+    }
+
+    public void close(Long id) {
+        Contrato contrato = contratoRepository.findById(id).orElseThrow(ContratoNotFound::new);
+        contrato.close();
+        contratoRepository.save(contrato);
+    }
+
+    public List<ContratoDto> findExpiringWithin(int days) {
+        LocalDate start = LocalDate.now();
+        LocalDate end = start.plusDays(days);
+        List<Contrato> contratoList = contratoRepository.findActiveContractsExpiringBetween(start, end);
+        return DtoUtils.convertModelList(contratoList, DtoUtils::contratoModelToDto);
+    }
+
+
+    List<ContratoDto> findByImovelId(Long imovelId) {
+        Imovel imovel = imovelRepository.findById(imovelId).orElseThrow(ImovelNotFound::new);
+        List<Contrato> contratoList = contratoRepository.findByImovel(imovel);
+        return DtoUtils.convertModelList(contratoList, DtoUtils::contratoModelToDto);
+    }
 
 
     

@@ -6,6 +6,7 @@ public record ContratoResumoDto(
     Long contratoId,
     LocalDate startDate,
     LocalDate endDate,
+    boolean active,
     Long predioId,
     String predioNome,
     String predioEndereco,

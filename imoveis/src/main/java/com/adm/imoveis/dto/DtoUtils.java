@@ -146,6 +146,7 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             contrato.getId(),
             contrato.getStartDate(),
             contrato.getEndDate(),
+            contrato.isActive(),
             contrato.getImovel().getPredio().getId(),
             contrato.getImovel().getPredio().getNome(),
             contrato.getImovel().getPredio().getEndereco(),
@@ -163,6 +164,7 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             contrato.getId(),
             contrato.getStartDate(),
             contrato.getEndDate(),
+            contrato.isActive(),
             imobiliariaModelToResumoDto(contrato.getImobiliaria()),
             imovelModelToResumoDto(contrato.getImovel()),
             convertModelList(contrato.getRepasses(), DtoUtils::repasseModelToResumoDto)

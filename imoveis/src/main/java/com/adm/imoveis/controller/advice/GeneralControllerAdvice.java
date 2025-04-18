@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.adm.imoveis.service.exception.BusinessException;
 import com.adm.imoveis.service.exception.NotFoundException;
 
 @ControllerAdvice
@@ -12,5 +13,10 @@ public class GeneralControllerAdvice {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<String> handleNotFound(RuntimeException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<String> handleBusinessError(BusinessException e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }

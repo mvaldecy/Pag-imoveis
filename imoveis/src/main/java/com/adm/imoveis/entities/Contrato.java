@@ -28,6 +28,8 @@ public class Contrato {
 
     private LocalDate endDate;
 
+    private boolean isActive;
+
     @ManyToOne
     @JoinColumn(name = "imovel_id")
     @JsonIgnore
@@ -48,11 +50,14 @@ public class Contrato {
     private List<Repasse> repasses;
 
 
-    public Contrato() {}
+    public Contrato() {
+        this.isActive = true;
+    }
 
     public Contrato(LocalDate startDate, LocalDate endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
+        this.isActive = true;
     }
 
     public Long getId() {
@@ -111,6 +116,13 @@ public class Contrato {
         this.repasses = repasses;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void close() {
+        this.isActive = false;
+    }
     
     
 
