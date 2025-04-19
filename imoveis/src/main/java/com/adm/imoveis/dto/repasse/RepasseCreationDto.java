@@ -5,6 +5,7 @@ import java.time.YearMonth;
 public record RepasseCreationDto(
     Double valorRepasse,
     YearMonth dataRepasse,
-    Long contratoId) {
+    Long contratoId
+    ) {
     
 }
