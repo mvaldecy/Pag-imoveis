@@ -200,6 +200,8 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
 
 
     public static <T, R> List<R> convertModelList(List<T> modelList, Function<T, R> mapper) {
-        return modelList.stream().map(mapper).toList();
+        if (modelList == null) return List.of(); // ⬅ retorna imediatamente se for null
+        return modelList.stream().map(mapper).toList(); // ⬅ só executa se não for null
     }
+    
 }
