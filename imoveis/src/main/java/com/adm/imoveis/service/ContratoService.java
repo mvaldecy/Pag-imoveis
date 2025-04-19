@@ -123,7 +123,7 @@ public class ContratoService {
     }
 
 
-    List<ContratoDto> findByImovelId(Long imovelId) {
+    public List<ContratoDto> findByImovelId(Long imovelId) {
         Imovel imovel = imovelRepository.findById(imovelId).orElseThrow(ImovelNotFound::new);
         List<Contrato> contratoList = contratoRepository.findByImovel(imovel);
         return DtoUtils.convertModelList(contratoList, DtoUtils::contratoModelToDto);
