@@ -27,7 +27,7 @@ public class PredioService {
         return DtoUtils.predioModelToDto(createdPredio);
     }
     
-    public List<PredioDto> getALl() {
+    public List<PredioDto> getAll() {
         List<Predio> predios = predioRepository.findAll();
         return DtoUtils.convertModelList(predios, DtoUtils::predioModelToDto);
     }
