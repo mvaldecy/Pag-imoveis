@@ -32,7 +32,7 @@ public class ContratoController {
 
   @GetMapping(value = "contrato")
   public ResponseEntity<List<ContratoDto>> getAll() {
-    return ResponseEntity.status(HttpStatus.OK).body(contratoService.getall());
+    return ResponseEntity.status(HttpStatus.OK).body(contratoService.getAll());
   }
 
   @GetMapping(value = "contrato/{id}")

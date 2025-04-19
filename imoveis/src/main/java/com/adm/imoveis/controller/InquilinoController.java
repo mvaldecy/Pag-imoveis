@@ -43,6 +43,6 @@ public class InquilinoController {
 
     @GetMapping(value = "inquilinoByCpf")
     public ResponseEntity<InquilinoDto> findByCpf(@RequestParam(value = "Cpf") String cpf) {
-        return ResponseEntity.ok(inquilinoService.finbyCpf(cpf));
+        return ResponseEntity.ok(inquilinoService.findByCpf(cpf));
     }
 }
