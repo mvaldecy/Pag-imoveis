@@ -10,6 +10,7 @@ public record ImovelDto(
     ImovelTipo tipo,
     int tamanho,
     String apto,
+    Double valor,
     ImovelStatus status,
     PredioResumoDto predio,
     String observacao

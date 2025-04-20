@@ -9,6 +9,7 @@ public record ImovelResumoDto(
     ImovelStatus status,
     int tamanho,
     ImovelTipo tipo,
+    Double valor,
     Long predioId,
     String predioNome,
     String predioEndereco,

@@ -113,6 +113,7 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             imovel.getStatus(),
             imovel.getTamanho(),
             imovel.getTipo(),
+            imovel.getValor(),
             imovel.getPredio().getId(),
             imovel.getPredio().getNome(),
             imovel.getPredio().getEndereco(),
@@ -126,6 +127,7 @@ public class DtoUtils { // fazer primeiro a conversao pra resumoDto e depois pra
             imovel.getTipo(),
             imovel.getTamanho(),
             imovel.getApto(),
+            imovel.getValor(),
             imovel.getStatus(),
             predioModelToResumoDto(imovel.getPredio()),
             imovel.getObservacao()
