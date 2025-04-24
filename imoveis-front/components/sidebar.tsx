@@ -55,7 +55,7 @@ export default function AppSidebar() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="border-t p-4">
-        <p className="text-xs text-muted-foreground">© 2023 Pag Imóveis</p>
+        <p className="text-xs text-muted-foreground">© 2025 Pag Imóveis</p>
       </SidebarFooter>
     </Sidebar>
   )

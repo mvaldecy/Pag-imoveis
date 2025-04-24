@@ -82,9 +82,13 @@ export default function InquilinoDetailPage() {
       errors.nome = "Nome é obrigatório"
     }
 
-    if (!inquilino.cpf.trim()) {
+    const cpfOuCnpj = inquilino.cpf.trim()
+    const cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$|^\d{11}$/
+    const cnpjRegex = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$|^\d{14}$/
+
+    if (!cpfOuCnpj) {
       errors.cpf = "CPF é obrigatório"
-    } else if (!/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(inquilino.cpf) && !/^\d{11}$/.test(inquilino.cpf)) {
+    } else if (!cpfRegex.test(cpfOuCnpj) || !cnpjRegex.test(cpfOuCnpj)) {
       errors.cpf = "CPF inválido. Use o formato 000.000.000-00 ou 00000000000"
     }
 
